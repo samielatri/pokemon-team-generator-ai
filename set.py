@@ -8,16 +8,7 @@ import json
 import httplib2
 
 
-# http = httplib2.Http()
-# status, response = http.request('https://play.pokemonshowdown.com/data/sets/gen8ou.json')
-#
-# todos = json.loads(response)
-#
-# print(todos['dex']["Venusaur"])
-#
-# json.dumps(todos)
-
-
+#Prends un dico et le nom d'un pokémon et donne son set compatible avec smogon
 def pokemon_to_pokepaste(dex, pokemon):
     pokemon_set = dex['dex'][pokemon]
     for i in pokemon_set:
@@ -36,6 +27,7 @@ def pokemon_to_pokepaste(dex, pokemon):
     return pokemon_paste
 
 
+#Prends un tier et une liste de pokémon et donne leurs set compatible avec smogon
 def to_pokepaste(tier, pokemon):
     http = httplib2.Http()
     status, response = http.request(f'https://play.pokemonshowdown.com/data/sets/{tier}.json')
