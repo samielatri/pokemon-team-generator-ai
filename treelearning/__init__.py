@@ -7,14 +7,20 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import LabelEncoder
 
 from pokedexGenerator.generator import pokedex_df
 
 df = pokedex_df()
 
-
+le = LabelEncoder()
+df['type1']= LabelEncoder().fit_transform(df['type1'])
+df['type2']= LabelEncoder().fit_transform(df['type2'])
+df['abilitie1']= LabelEncoder().fit_transform(df['abilitie1'])
 #split dataset in features and target variable
-feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
+feature_cols = ['type1', 'type2', 'hp', 'atk', 'def', 'spa', 'spd', 'spe','abilitie1']
 X = df[feature_cols] # Features
 y = df.tier # Target variable
 

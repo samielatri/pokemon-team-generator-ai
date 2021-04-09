@@ -27,6 +27,17 @@ def pokedex():
 
     list_pokemon = []
     for pokemon in pokedex:
+        if str(pokedex[pokemon].get('tier', "")) == "":
+            list_pokemon.append(pokemon)
+        if str(pokedex[pokemon].get('tier', "")) == "Illegal":
+            list_pokemon.append(pokemon)
+
+    for pokemon in list_pokemon:
+        del pokedex[pokemon]
+
+
+    list_pokemon = []
+    for pokemon in pokedex:
         if str(pokedex[pokemon].get('genderRatio', "")) != "":
             del pokedex[pokemon]['genderRatio']
         del pokedex[pokemon]['heightm']
@@ -42,25 +53,29 @@ def pokedex():
             del pokedex[pokemon]['prevo']
         if str(pokedex[pokemon].get('gender', "")) != "":
             del pokedex[pokemon]['gender']
-        if str(pokedex[pokemon].get('tier', "")) == "":
-            pokedex[pokemon]['tier'] = "Illegal"
         list_pokemon.append(pokemon)
     return pokedex
 
 
 def pokedex_df():
     # Create a DataFrame object
-    df = pd.DataFrame(columns=['Name', 'num', 'types', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilities', 'tier'])
+    df = pd.DataFrame(columns=['Name', 'num', 'type1', 'type2', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilitie1', 'abilitie2', 'abilitieH', 'tier'])
     # Add new ROW
     poke = pokedex()
     i = 0
     for pokemon in poke:
-        list = [poke[pokemon]['name'], poke[pokemon]['num'], poke[pokemon]['types'],
+        list = [poke[pokemon]['name'], poke[pokemon]['num'], poke[pokemon]['types'][0],
+                len(poke[pokemon]['types'])==1 if 'none'else poke[pokemon]['types'][0],
                 poke[pokemon]['baseStats']['hp'], poke[pokemon]['baseStats']['atk'],
                 poke[pokemon]['baseStats']['def'], poke[pokemon]['baseStats']['spa'],
                 poke[pokemon]['baseStats']['spd'], poke[pokemon]['baseStats']['spe'],
-                poke[pokemon]['abilities'], poke[pokemon]['tier']]
+                poke[pokemon]['abilities']["0"],
+                str(pokedex[pokemon]['abilities'].get('1', "none")),
+                str(pokedex[pokemon]['abilities'].get('H', "none")),
+                poke[pokemon]['tier']]
         df.loc[i] = list
         i = i + 1
+
+    print(len(df))
     return df
 
