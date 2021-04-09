@@ -10,7 +10,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from six import StringIO
 from IPython.display import Image
 from sklearn.tree import export_graphviz
@@ -21,19 +21,22 @@ from pokedexGenerator.generator import pokedex_df
 print('test')
 
 df = pokedex_df()
+del df['abilitie1']
+del df['abilitie2']
+del df['abilitieH']
 
 print(df['tier'].unique())
 print(df['tier'].value_counts())
 
+#enc = OneHotEncoder(handle_unknown='ignore')
 
-le = LabelEncoder()
-df['type1']= LabelEncoder().fit_transform(df['type1'])
-df['type2']= LabelEncoder().fit_transform(df['type2'])
-df['abilitie1']= LabelEncoder().fit_transform(df['abilitie1'])
-df['abilitie2']= LabelEncoder().fit_transform(df['abilitie2'])
-df['abilitieH']= LabelEncoder().fit_transform(df['abilitieH'])
-#split dataset in features and target variable
-feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
+# enc_df = pd.DataFrame(enc.fit_transform(df[['type1']]).toarray())
+# df = df.join(enc_df)
+
+df = pd.get_dummies(df, prefix=['type1', 'type2'], columns=['type1', 'type2'])
+print(df)
+print(list(df))
+feature_cols = ['num', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'type1_Bug', 'type1_Dark', 'type1_Dragon', 'type1_Electric', 'type1_Fairy', 'type1_Fighting', 'type1_Fire', 'type1_Flying', 'type1_Ghost', 'type1_Grass', 'type1_Ground', 'type1_Ice', 'type1_Normal', 'type1_Poison', 'type1_Psychic', 'type1_Rock', 'type1_Steel', 'type1_Water', 'type2_False', 'type2_True']
 X = df[feature_cols] # Features
 y = df.tier # Target variable
 
