@@ -14,9 +14,9 @@ def pokedex():
     status, response = http.request(f'https://play.pokemonshowdown.com/data/pokedex.json')
     pokedex = json.loads(response)
     list_pokemon = []
-    for pokemon in pokedex:
-        if pokedex[pokemon]['num'] > 151:
-            list_pokemon.append(pokemon)
+    # for pokemon in pokedex:
+    #     if pokedex[pokemon]['num'] > 151:
+    #         list_pokemon.append(pokemon)
 
     for pokemon in pokedex:
         if pokedex[pokemon]['num'] < 1:
@@ -42,13 +42,15 @@ def pokedex():
             del pokedex[pokemon]['prevo']
         if str(pokedex[pokemon].get('gender', "")) != "":
             del pokedex[pokemon]['gender']
+        if str(pokedex[pokemon].get('tier', "")) == "":
+            pokedex[pokemon]['tier'] = "Illegal"
         list_pokemon.append(pokemon)
     return pokedex
 
 
 def pokedex_df():
     # Create a DataFrame object
-    df = pd.DataFrame(columns=['Name', 'num', 'types', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilities'])
+    df = pd.DataFrame(columns=['Name', 'num', 'types', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilities', 'tier'])
     # Add new ROW
     poke = pokedex()
     i = 0
@@ -57,7 +59,8 @@ def pokedex_df():
                 poke[pokemon]['baseStats']['hp'], poke[pokemon]['baseStats']['atk'],
                 poke[pokemon]['baseStats']['def'], poke[pokemon]['baseStats']['spa'],
                 poke[pokemon]['baseStats']['spd'], poke[pokemon]['baseStats']['spe'],
-                poke[pokemon]['abilities']]
+                poke[pokemon]['abilities'], poke[pokemon]['tier']]
         df.loc[i] = list
         i = i + 1
+    return df
 
