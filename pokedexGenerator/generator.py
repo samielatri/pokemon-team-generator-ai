@@ -58,6 +58,8 @@ def pokedex():
             pokedex[pokemon]['abilities']['1'] = 'none'
         if str(pokedex[pokemon]['abilities'].get('H', "")) == "":
             pokedex[pokemon]['abilities']['H'] = 'none'
+
+
     return pokedex
 
 
@@ -75,10 +77,29 @@ def pokedex_df():
                 poke[pokemon]['baseStats']['spd'], poke[pokemon]['baseStats']['spe'],
                 poke[pokemon]['abilities']['0'], poke[pokemon]['abilities']['1'],
                 poke[pokemon]['abilities']['H'],
-                poke[pokemon]['tier']]
+                switch(str(poke[pokemon]['tier']))]
         df.loc[i] = list
         i = i + 1
 
     print(len(df))
     return df
 
+
+def switch(argument):
+    switcher = {
+        'LC':'weak',
+        'NFE':'weak',
+        'RUBL':'medium',
+        'AG':'strong',
+        'PU':'weak',
+        'NU':'medium',
+        '(PU)':'weak',
+        'PUBL':'weak',
+        'UU':'strong',
+        'OU':'strong',
+        'UUBL':'strong',
+        'RU':'medium',
+        'Uber':'strong',
+        'NUBL':'medium',
+    }
+    return switcher.get(argument)
