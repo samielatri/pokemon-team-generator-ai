@@ -54,12 +54,16 @@ def pokedex():
         if str(pokedex[pokemon].get('gender', "")) != "":
             del pokedex[pokemon]['gender']
         list_pokemon.append(pokemon)
+        if str(pokedex[pokemon]['abilities'].get('1', "")) == "":
+            pokedex[pokemon]['abilities']['1'] = 'none'
+        if str(pokedex[pokemon]['abilities'].get('H', "")) == "":
+            pokedex[pokemon]['abilities']['H'] = 'none'
     return pokedex
 
 
 def pokedex_df():
     # Create a DataFrame object
-    df = pd.DataFrame(columns=['Name', 'num', 'type1', 'type2', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilitie1', 'abilitie2', 'abilitieH', 'tier'])
+    df = pd.DataFrame(columns=['Name', 'num', 'type1', 'type2', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilitie1', 'abilitie2', 'abilitieH','tier'])
     # Add new ROW
     poke = pokedex()
     i = 0
@@ -69,9 +73,8 @@ def pokedex_df():
                 poke[pokemon]['baseStats']['hp'], poke[pokemon]['baseStats']['atk'],
                 poke[pokemon]['baseStats']['def'], poke[pokemon]['baseStats']['spa'],
                 poke[pokemon]['baseStats']['spd'], poke[pokemon]['baseStats']['spe'],
-                poke[pokemon]['abilities']["0"],
-                str(pokedex[pokemon]['abilities'].get('1', "none")),
-                str(pokedex[pokemon]['abilities'].get('H', "none")),
+                poke[pokemon]['abilities']['0'], poke[pokemon]['abilities']['1'],
+                poke[pokemon]['abilities']['H'],
                 poke[pokemon]['tier']]
         df.loc[i] = list
         i = i + 1

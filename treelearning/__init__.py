@@ -19,8 +19,10 @@ le = LabelEncoder()
 df['type1']= LabelEncoder().fit_transform(df['type1'])
 df['type2']= LabelEncoder().fit_transform(df['type2'])
 df['abilitie1']= LabelEncoder().fit_transform(df['abilitie1'])
+df['abilitie2']= LabelEncoder().fit_transform(df['abilitie2'])
+df['abilitieH']= LabelEncoder().fit_transform(df['abilitieH'])
 #split dataset in features and target variable
-feature_cols = ['type1', 'type2', 'hp', 'atk', 'def', 'spa', 'spd', 'spe','abilitie1']
+feature_cols = ['type1', 'type2', 'hp', 'atk', 'def', 'spa', 'spd', 'spe','abilitie1', 'abilitie2', 'abilitieH']
 X = df[feature_cols] # Features
 y = df.tier # Target variable
 
