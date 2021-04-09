@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+import json
+
+import httplib2
+import pandas as pd
+
+
+def pokedex():
+    http = httplib2.Http()
+    status, response = http.request(f'https://play.pokemonshowdown.com/data/pokedex.json')
+    pokedex = json.loads(response)
+    list_pokemon = []
+    for pokemon in pokedex:
+        if pokedex[pokemon]['num'] > 151:
+            list_pokemon.append(pokemon)
+
+    for pokemon in pokedex:
+        if pokedex[pokemon]['num'] < 1:
+            list_pokemon.append(pokemon)
+
+    for pokemon in list_pokemon:
+        del pokedex[pokemon]
+
+    list_pokemon = []
+    for pokemon in pokedex:
+        if str(pokedex[pokemon].get('genderRatio', "")) != "":
+            del pokedex[pokemon]['genderRatio']
+        del pokedex[pokemon]['heightm']
+        del pokedex[pokemon]['weightkg']
+        if str(pokedex[pokemon].get('color', "")) != "":
+            del pokedex[pokemon]['color']
+        if str(pokedex[pokemon].get('evos', "")) != "":
+            del pokedex[pokemon]['evos']
+        del pokedex[pokemon]['eggGroups']
+        if str(pokedex[pokemon].get('baseSpecies', "")) != "":
+            del pokedex[pokemon]['baseSpecies']
+        if str(pokedex[pokemon].get('prevo', "")) != "":
+            del pokedex[pokemon]['prevo']
+        if str(pokedex[pokemon].get('gender', "")) != "":
+            del pokedex[pokemon]['gender']
+        list_pokemon.append(pokemon)
+    return pokedex
+
+
+def pokedex_df():
+    # Create a DataFrame object
+    df = pd.DataFrame(columns=['Name', 'num', 'types', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilities'])
+    # Add new ROW
+    poke = pokedex()
+    i = 0
+    for pokemon in poke:
+        list = [poke[pokemon]['name'], poke[pokemon]['num'], poke[pokemon]['types'],
+                poke[pokemon]['baseStats']['hp'], poke[pokemon]['baseStats']['atk'],
+                poke[pokemon]['baseStats']['def'], poke[pokemon]['baseStats']['spa'],
+                poke[pokemon]['baseStats']['spd'], poke[pokemon]['baseStats']['spe'],
+                poke[pokemon]['abilities']]
+        df.loc[i] = list
+        i = i + 1
+

@@ -39,6 +39,6 @@ def to_pokepaste(tier, pokemon):
 
 
 print(to_pokepaste('gen8ou', ["Venusaur", "Charizard", "Clefable", "Ninetales-Alola", "Slowbro", "Gengar"]))
-fichier = open("data.txt", "a")
-fichier.write(to_pokepaste('gen8ou', ["Venusaur", "Charizard", "Clefable", "Ninetales-Alola", "Slowbro", "Gengar"]))
-fichier.close()
+# fichier = open("data.txt", "a")
+# fichier.write(to_pokepaste('gen8ou', ["Venusaur", "Charizard", "Clefable", "Ninetales-Alola", "Slowbro", "Gengar"]))
+# fichier.close()
