@@ -17,23 +17,22 @@ from sklearn.tree import export_graphviz
 import pydotplus
 
 from pokedexGenerator.generator import pokedex_df
-
-print('test')
-
 df = pokedex_df()
 
 print(df['tier'].unique())
 print(df['tier'].value_counts())
 
 
-le = LabelEncoder()
-df['type1']= LabelEncoder().fit_transform(df['type1'])
-df['type2']= LabelEncoder().fit_transform(df['type2'])
-df['abilitie1']= LabelEncoder().fit_transform(df['abilitie1'])
-df['abilitie2']= LabelEncoder().fit_transform(df['abilitie2'])
-df['abilitieH']= LabelEncoder().fit_transform(df['abilitieH'])
+# le = LabelEncoder()
+# df['type1']= LabelEncoder().fit_transform(df['type1'])
+# df['type2']= LabelEncoder().fit_transform(df['type2'])
+# df['abilitie1']= LabelEncoder().fit_transform(df['abilitie1'])
+# df['abilitie2']= LabelEncoder().fit_transform(df['abilitie2'])
+# df['abilitieH']= LabelEncoder().fit_transform(df['abilitieH'])
 #split dataset in features and target variable
-feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
+feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'Bug', 'Dark', 'Dragon', 'Electric',
+                'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground',
+                 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
 X = df[feature_cols] # Features
 y = df.tier # Target variable
 
@@ -63,7 +62,7 @@ clf = clf.fit(X_train,y_train)
 y_pred = clf.predict(X_test)
 
 # Model Accuracy, how often is the classifier correct?
-print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
 
 dot_data = StringIO()
 export_graphviz(clf, out_file=dot_data,
