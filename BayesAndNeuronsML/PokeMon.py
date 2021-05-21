@@ -19,7 +19,7 @@ sns.set_theme()
 # In[3]:
 
 
-dataset1 = pd.read_csv('pokemon.csv', index_col=0)
+dataset1 = pd.read_csv('Pokemon.csv', index_col=0)
 
 dataset = pd.concat([(dataset1.loc[dataset1['tier'] == 'weak'  ])[:130],
                      (dataset1.loc[dataset1['tier'] == 'medium'])[:120],
