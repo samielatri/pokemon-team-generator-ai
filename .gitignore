@@ -130,3 +130,7 @@ dmypy.json
 
 # outputs
 ./output/*.csv
+*.csv
+
+#editor
+.idea
