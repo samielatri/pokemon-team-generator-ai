@@ -10,7 +10,6 @@ from sklearn.metrics import confusion_matrix
 from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split # Import train_test_split function
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
-from sklearn.preprocessing import LabelEncoder
 from six import StringIO
 from IPython.display import Image
 from sklearn.tree import export_graphviz
@@ -71,3 +70,4 @@ export_graphviz(clf, out_file=dot_data,
 graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 graph.write_png('tiers.png')
 Image(graph.create_png())
+graph.show()
