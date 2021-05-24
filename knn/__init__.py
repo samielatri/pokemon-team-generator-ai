@@ -7,8 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 
-
-from pokedexGenerator.generator import pokedex_df
+from pokedex.pokedexGenerator.generator import pokedex_df
 
 def X_Y_knn():
     df = pokedex_df()

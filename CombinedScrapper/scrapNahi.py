@@ -10,14 +10,14 @@ print('Grabbing the page...')
 page = urllib.request.urlopen(url)
 soup = BeautifulSoup(page, 'html.parser')
 
-# first we do the scrapping
+# first we do the CombinedScrapper
 file = open("scrapped.txt", "w")
 for data in soup:
     file.write(str(data))
 file.close()
-print("scrapping done")
+print("CombinedScrapper done")
 
-# second we add the scrapping page into a dataframe
+# second we add the CombinedScrapper page into a dataframe
 data = pd.DataFrame(
     columns=['Name', 'Raw count', 'Avg. weight', 'Viability Ceiling', 'Abilities', 'Items', 'Spreads', 'Moves',
              'Teammates', 'Checks and Counters'])
