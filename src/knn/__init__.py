@@ -7,23 +7,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 
-from pokedex.pokedexGenerator.generator import pokedex_df
+from CombinedScrapper.generator import pokedex_df
 
 def X_Y_knn():
     df = pokedex_df()
 
-    feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'Bug', 'Dark', 'Dragon', 'Electric',
-                    'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground',
-                     'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
+    feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
     X = df[feature_cols] # Features
     y = df.tier # Target variable
 
-    print(X)
-    print(y)
-
-
-
-    X_train, X_test, y_train, y_test = train_test_split(X, y.astype(str), test_size=0.25, random_state=1) # 70% training and 30% test
+    X_train, X_test, y_train, y_test = train_test_split(X, y.astype(str), test_size=0.30, random_state=42) # 70% training and 30% test
 
     knn = KNeighborsClassifier(n_neighbors=5)
 
@@ -38,7 +31,3 @@ def X_Y_knn():
     return X_train, X_test, y_train, y_test
 
 X_Y_knn()
-
-X, y = make_moons(noise=0.3, random_state=0)
-print( X)
-print( y )

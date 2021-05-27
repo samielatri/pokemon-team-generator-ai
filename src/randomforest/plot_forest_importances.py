@@ -24,7 +24,7 @@ X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.30, rando
 # A random forest classifier will be fitted to compute the feature importances.
 from sklearn.ensemble import RandomForestClassifier
 
-forest = RandomForestClassifier(random_state=0, criterion="entropy", max_depth=5)
+forest = RandomForestClassifier(random_state=0, criterion="entropy", max_depth=10)
 forest.fit(X_train, y_train)
 y_pred = forest.predict(X_test)
 print(y_pred)

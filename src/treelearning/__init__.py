@@ -27,9 +27,7 @@ print(df['tier'].value_counts())
 # df['abilitie2']= LabelEncoder().fit_transform(df['abilitie2'])
 # df['abilitieH']= LabelEncoder().fit_transform(df['abilitieH'])
 #split dataset in features and target variable
-feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe', 'Bug', 'Dark', 'Dragon', 'Electric',
-                'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground',
-                 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
+feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
 X = df[feature_cols] # Features
 y = df.tier # Target variable
 

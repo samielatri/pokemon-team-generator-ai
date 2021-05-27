@@ -8,8 +8,6 @@ from sklearn.pipeline import make_pipeline
 
 from CombinedScrapper.generator import poke_data_set
 
-print(__doc__)
-
 RANDOM_STATE = 42
 FIG_SIZE = (10, 7)
 
@@ -24,12 +22,12 @@ X_train, X_test, y_train, y_test = train_test_split(features, target,
                                                     random_state=RANDOM_STATE)
 
 # Fit to data and predict using pipelined GNB and PCA.
-unscaled_clf = make_pipeline(PCA(n_components=2), GaussianNB())
+unscaled_clf = make_pipeline(PCA(n_components=4), GaussianNB())
 unscaled_clf.fit(X_train, y_train)
 pred_test = unscaled_clf.predict(X_test)
 
 # Fit to data and predict using pipelined scaling, GNB and PCA.
-std_clf = make_pipeline(StandardScaler(), PCA(n_components=2), GaussianNB())
+std_clf = make_pipeline(StandardScaler(), PCA(n_components=4), GaussianNB())
 std_clf.fit(X_train, y_train)
 pred_test_std = std_clf.predict(X_test)
 

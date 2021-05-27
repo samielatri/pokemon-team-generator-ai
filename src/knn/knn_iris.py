@@ -21,7 +21,7 @@ poke = poke_data_set()
 # slicing by using a two-dim dataset
 X = iris.data[:, :2]
 print(X)
-X = poke.data[:, :2]
+X = poke.data[:, :2].astype('int')
 print(X)
 y = iris.target
 print(y.shape)
