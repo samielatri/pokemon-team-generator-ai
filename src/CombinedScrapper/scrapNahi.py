@@ -166,17 +166,12 @@ def scrapping(annee, tier):
 def teammates(file):
     dataTemp = pd.read_csv(file)
     nvDf = pd.DataFrame(columns=['Name', 'Percentage'])
-    for i in range(len(dataTemp)):
-        listTemp = []
-        listTemp.append(dataTemp.loc[i, "Teammates"])
-        print(listTemp)
-        print("mytype is ", type(listTemp))
-        print ("i: ", i)
-        while (listTemp!= NULL ):
-            lineTemp = j.split(",")
-            nameTmp = lineTemp.split()[0]
-            percentage = lineTemp.split()[1]
-
-        nvDf = nvDf.append({'Name': nameTmp, 'Percentage': percentage}, ignore_index=True)
-    print(nvDf)
-    return nvDf
+    linetmp =""
+    for i in dataTemp.Teammates.values.tolist(): #TODO: ajouter un for pour trier au max
+        linetmp=i.translate({ord(i): None for i in '[]'})
+        listtmp= list(linetmp.split(","))
+        for j in listtmp:
+            nameP = j.split()[0].replace("'", "")
+            percent = j.split()[1].replace("'", "")
+            nvDf = nvDf.append({"Name": nameP, "Percentage":percent}, ignore_index=True)
+            print(nvDf)
