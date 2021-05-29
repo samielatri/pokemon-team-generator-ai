@@ -165,13 +165,23 @@ def scrapping(annee, tier):
 
 def teammates(file):
     dataTemp = pd.read_csv(file)
-    nvDf = pd.DataFrame(columns=['Name', 'Percentage'])
-    linetmp =""
-    for i in dataTemp.Teammates.values.tolist(): #TODO: ajouter un for pour trier au max
-        linetmp=i.translate({ord(i): None for i in '[]'})
-        listtmp= list(linetmp.split(","))
-        for j in listtmp:
+    newDf = pd.DataFrame(columns=['Teammate', 'Percentage'])
+    specialDF = pd.DataFrame(columns=['Pokemon'])
+    line = ""
+    for i in dataTemp.Teammates.values.tolist():
+        line=i.translate({ord(i): None for i in '[]'})
+        list_tmp= list(line.split(","))
+        z = 0
+        for k in range(0, len(list_tmp[z])):
+            val = dataTemp['Name'].values[z]
+            specialDF = specialDF.append({"Pokemon": val}, ignore_index=True)
+            if k == len(list_tmp):
+                z = z + 1
+        for j in list_tmp:
             nameP = j.split()[0].replace("'", "")
             percent = j.split()[1].replace("'", "")
-            nvDf = nvDf.append({"Name": nameP, "Percentage":percent}, ignore_index=True)
-            print(nvDf)
+            newDf = newDf.append({"Teammate": nameP, "Percentage":percent}, ignore_index=True)
+
+    finalDF = specialDF.merge(newDf, left_index=True, right_index=True)
+    print(finalDF)
+    return finalDF
