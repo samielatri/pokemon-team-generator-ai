@@ -159,29 +159,20 @@ def scrapping(annee, tier):
                 ignore_index=True)
     fo.close()
     data.to_csv(r'./export_poke.csv', index=False, header=True)
-    print(data)
+    #print(data)
     return data
 
 
-def teammates(file):
+def teammates(file, pokemon):
     dataTemp = pd.read_csv(file)
-    newDf = pd.DataFrame(columns=['Teammate', 'Percentage'])
-    specialDF = pd.DataFrame(columns=['Pokemon'])
-    line = ""
-    for i in dataTemp.Teammates.values.tolist():
-        line=i.translate({ord(i): None for i in '[]'})
-        list_tmp= list(line.split(","))
-        z = 0
-        for k in range(0, len(list_tmp[z])):
-            val = dataTemp['Name'].values[z]
-            specialDF = specialDF.append({"Pokemon": val}, ignore_index=True)
-            if k == len(list_tmp):
-                z = z + 1
+    finalList = []
+    if pokemon.islower():
+        return "Error : the first letter should be upper case"
+    for i in dataTemp.loc[dataTemp['Name'] == pokemon, 'Teammates'].tolist():
+        line = i.translate({ord(i): None for i in '[]'})
+        list_tmp = list(line.split(","))
         for j in list_tmp:
             nameP = j.split()[0].replace("'", "")
-            percent = j.split()[1].replace("'", "")
-            newDf = newDf.append({"Teammate": nameP, "Percentage":percent}, ignore_index=True)
+            finalList.append(nameP)
+    return finalList
 
-    finalDF = specialDF.merge(newDf, left_index=True, right_index=True)
-    print(finalDF)
-    return finalDF
