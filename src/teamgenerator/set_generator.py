@@ -9,7 +9,7 @@ import pandas as pd
 import sklearn
 
 
-def to_clustering():
+def usage_to_df():
     http = httplib2.Http()
     status, response = http.request(f'https://play.pokemonshowdown.com/data/sets/gen8ou.json')
     set = json.loads(response)
@@ -75,6 +75,6 @@ def to_clustering():
     return df
 
 def clustering_set():
-    df = to_clustering()
+    df = usage_to_df()
     feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
     return sklearn.utils.Bunch(data= (df[feature_cols].to_numpy()).astype('float') )

@@ -15,7 +15,7 @@ def pokemon_to_pokepaste(dex, pokemon):
         set_name = i
     pokemon_paste = pokemon + ' @ ' + pokemon_set[set_name]['item'] + '\n'\
                     + 'Ability: ' + pokemon_set[set_name]['ability'] + '\n' \
-                    + 'Level: 50\nEVs: ' \
+                    + 'Level: 100\nEVs: ' \
                     + str(pokemon_set[set_name]['evs'].get('hp', 0)) + ' HP / ' \
                     + str(pokemon_set[set_name]['evs'].get('def', 0)) + ' Def / ' \
                     + str(pokemon_set[set_name]['evs'].get('spa', 0)) + ' SpA / ' \
@@ -38,7 +38,6 @@ def to_pokepaste(tier, pokemon):
     return pokepaste
 
 
-print(to_pokepaste('gen8ou', ["Venusaur", "Charizard", "Clefable", "Ninetales-Alola", "Slowbro", "Gengar"]))
 # fichier = open("data.txt", "a")
 # fichier.write(to_pokepaste('gen8ou', ["Venusaur", "Charizard", "Clefable", "Ninetales-Alola", "Slowbro", "Gengar"]))
 # fichier.close()

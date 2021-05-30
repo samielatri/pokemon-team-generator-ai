@@ -7,7 +7,7 @@ import pandas as pd
 def scrapping(annee, tier):
     # here we have to pass url and path
     # (where you want to save ur text file)
-    url = f'https://www.smogon.com/stats/{annee}/moveset/{tier}-0.txt'
+    url = f'https://www.smogon.com/stats/{annee}/moveset/{tier}.txt'
     print('Grabbing the page...')
     page = urllib.request.urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
