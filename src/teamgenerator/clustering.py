@@ -1,47 +1,73 @@
-import dash
-import dash_core_components as dcc
-import dash_html_components as html
-import plotly.graph_objects as go
-import chart_studio.plotly as py
+# coding: utf-8
+
+# Implémentation de K-means clustering python
+# Code produit par le site https://mrmint.fr
+
+#Chargement des bibliothèques
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from team_generator.set_generator import clustering_set, to_clustering
+from sklearn import datasets
 
-from CombinedScrapper.generator import pokedex_df
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/alpha_shape.csv')
-df.head()
-df = pokedex_df()
+#chargement de jeu des données Iris
 
-print(df)
+def clustering_label():
+    poke = clustering_set()
+    label = to_clustering()
+    label = label['Name']
 
-scatter = dict(
-    mode="markers",
-    name="y",
-    type="scatter3d",
-    x=df['atk'], y=df['spa'], z=df['spe'],
-    marker=dict(size=2, color="rgb(23, 190, 207)")
-)
-clusters = dict(
-    alphahull=7,
-    name="y",
-    opacity=0.1,
-    type="mesh3d",
-    x=df['atk'], y=df['spa'], z=df['spe']
-)
-layout = dict(
-    title='3d point clustering',
-    scene=dict(
-        xaxis=dict(zeroline=False),
-        yaxis=dict(zeroline=False),
-        zaxis=dict(zeroline=False),
-    )
-)
+    #importer le jeu de données Iris dataset à l'aide du module pandas
+    x = pd.DataFrame(poke.data)
 
-fig = dict(data=[scatter, clusters], layout=layout)
+    x.columns = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
 
-app = dash.Dash(__name__)
+    #Création d'un objet K-Means avec un regroupement en 3 clusters (groupes)
+    model=KMeans(n_clusters=3)
 
-app.layout = html.Div([
-    dcc.Graph(id="graph", figure=fig),
-])
+    #application du modèle sur notre jeu de données Iris
+    model.fit(x)
 
-app.run_server(debug=True)
+    colormap=np.array(['Red','green','blue'])
+    print(model.labels_)
+
+
+    #Visualisation des clusters formés par K-Means
+    plt.scatter(x.spe, x.atk,c=colormap[model.labels_],s=40)
+    i=0
+    while i < len(label):
+        plt.text(x.spe[i], x.atk[i], label[i],
+                         fontsize=10)
+        i=i+1
+
+    plt.title('Classification K-means ')
+    plt.show()
+    return model.labels_
+
+def show_clustering() :
+    poke = clustering_set()
+    label = to_clustering()
+    label = label['Name']
+
+    # importer le jeu de données Iris dataset à l'aide du module pandas
+    x = pd.DataFrame(poke.data)
+
+    x.columns = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
+    labels_ = clustering_label()
+    colormap = np.array(['Red', 'green', 'blue'])
+    print(labels_)
+
+    # Visualisation des clusters formés par K-Means
+    plt.scatter(x.spe, x.atk, c=colormap[labels_], s=40)
+    i = 0
+    while i < len(label):
+        plt.text(x.spe[i], x.atk[i], label[i],
+                 fontsize=10)
+        i = i + 1
+
+    plt.title('Classification K-means ')
+    plt.show()
+
+show_clustering()
