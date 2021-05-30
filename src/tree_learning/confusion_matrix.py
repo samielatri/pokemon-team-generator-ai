@@ -8,7 +8,7 @@ from sklearn.metrics import plot_confusion_matrix
 # import some data to play with
 from sklearn.tree import DecisionTreeClassifier
 
-from CombinedScrapper.generator import poke_data_set
+from CombinedScrapper.pokedex_to_df_ds import poke_data_set
 
 def confusion_matrix():
     ds = poke_data_set()

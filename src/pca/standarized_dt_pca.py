@@ -6,80 +6,91 @@ from sklearn import metrics
 import matplotlib.pyplot as plt
 from sklearn.pipeline import make_pipeline
 
-from CombinedScrapper.generator import poke_data_set
-
-RANDOM_STATE = 42
-FIG_SIZE = (10, 7)
+from CombinedScrapper.pokedex_to_df_ds import poke_data_set
 
 
-poke = poke_data_set()
-features, target = poke.data, poke.target
+def pca_accuracy():
+    poke = poke_data_set()
+    features, target = poke.data, poke.target
+
+    # Make a train/test split using 30% test size
+    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=42)
+
+    # Fit to data and predict using pipelined GNB and PCA.
+    unscaled_clf = make_pipeline(PCA(n_components=6), GaussianNB())
+    unscaled_clf.fit(X_train, y_train)
+    pred_test = unscaled_clf.predict(X_test)
+
+    # Fit to data and predict using pipelined scaling, GNB and PCA.
+    std_clf = make_pipeline(StandardScaler(), PCA(n_components=6), GaussianNB())
+    std_clf.fit(X_train, y_train)
+    pred_test_std = std_clf.predict(X_test)
+
+    # Show prediction accuracies in scaled and unscaled data.
+    print("___PCA__NORMAL_DATASET___")
+    print("Accuracy: ",metrics.accuracy_score(y_test, pred_test))
+    print('\n')
+
+    print("___PCA__STANDARDIZED_DATASET___")
+    print("Accuracy:",metrics.accuracy_score(y_test, pred_test_std))
+    print('\n')
 
 
-# Make a train/test split using 30% test size
-X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=RANDOM_STATE)
+def show_pca():
+    poke = poke_data_set()
+    features, target = poke.data, poke.target
 
-# Fit to data and predict using pipelined GNB and PCA.
-unscaled_clf = make_pipeline(PCA(n_components=4), GaussianNB())
-unscaled_clf.fit(X_train, y_train)
-pred_test = unscaled_clf.predict(X_test)
+    # Make a train/test split using 30% test size
+    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=42)
 
-# Fit to data and predict using pipelined scaling, GNB and PCA.
-std_clf = make_pipeline(StandardScaler(), PCA(n_components=4), GaussianNB())
-std_clf.fit(X_train, y_train)
-pred_test_std = std_clf.predict(X_test)
+    # Fit to data and predict using pipelined GNB and PCA.
+    unscaled_clf = make_pipeline(PCA(n_components=6), GaussianNB())
+    unscaled_clf.fit(X_train, y_train)
+    pred_test = unscaled_clf.predict(X_test)
 
-# Show prediction accuracies in scaled and unscaled data.
-print('\nPrediction accuracy for the normal test dataset with PCA')
-print("Accuracy:", metrics.accuracy_score(y_test, pred_test))
+    # Fit to data and predict using pipelined scaling, GNB and PCA.
+    std_clf = make_pipeline(StandardScaler(), PCA(n_components=6), GaussianNB())
+    std_clf.fit(X_train, y_train)
 
-print('\nPrediction accuracy for the standardized test dataset with PCA')
-print("Accuracy:",metrics.accuracy_score(y_test, pred_test_std))
+    # Extract PCA from pipeline
+    pca = unscaled_clf.named_steps['pca']
+    pca_std = std_clf.named_steps['pca']
 
-# Extract PCA from pipeline
-pca = unscaled_clf.named_steps['pca']
-pca_std = std_clf.named_steps['pca']
+    # Use PCA without and with scale on X_train data for visualization.
+    X_train_transformed = pca.transform(X_train)
+    scaler = std_clf.named_steps['standardscaler']
+    X_train_std_transformed = pca_std.transform(scaler.transform(X_train))
 
-# Show first principal components
-print('\nPC 1 without scaling:\n', pca.components_[0])
-print('\nPC 1 with scaling:\n', pca_std.components_[0])
+    # visualize standardized vs. untouched dataset with PCA performed
+    fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=(10, 7))
 
-# Use PCA without and with scale on X_train data for visualization.
-X_train_transformed = pca.transform(X_train)
-scaler = std_clf.named_steps['standardscaler']
-X_train_std_transformed = pca_std.transform(scaler.transform(X_train))
+    class_names = ['weak', 'medium', 'strong']
+    for l, c, m in zip(range(0, 3), ('blue', 'red', 'green'), ('^', 's', 'o')):
+        ax1.scatter(X_train_transformed[y_train == l, 0],
+                    X_train_transformed[y_train == l, 1],
+                    color=c,
+                    label=class_names[l],
+                    alpha=0.5,
+                    marker=m
+                    )
 
-# visualize standardized vs. untouched dataset with PCA performed
-fig, (ax1, ax2) = plt.subplots(ncols=2, figsize=FIG_SIZE)
+    for l, c, m in zip(range(0, 3), ('blue', 'red', 'green'), ('^', 's', 'o')):
+        ax2.scatter(X_train_std_transformed[y_train == l, 0],
+                    X_train_std_transformed[y_train == l, 1],
+                    color=c,
+                    label=class_names[l],
+                    alpha=0.5,
+                    marker=m
+                    )
 
+    ax1.set_title('Training dataset after PCA')
+    ax2.set_title('Standardized training dataset after PCA')
 
-for l, c, m in zip(range(0, 3), ('blue', 'red', 'green'), ('^', 's', 'o')):
-    ax1.scatter(X_train_transformed[y_train == l, 0],
-                X_train_transformed[y_train == l, 1],
-                color=c,
-                label='class %s' % l,
-                alpha=0.5,
-                marker=m
-                )
+    for ax in (ax1, ax2):
+        ax.set_xlabel('1st principal component')
+        ax.set_ylabel('2nd principal component')
+        ax.legend(loc='upper right')
+        ax.grid()
 
-for l, c, m in zip(range(0, 3), ('blue', 'red', 'green'), ('^', 's', 'o')):
-    ax2.scatter(X_train_std_transformed[y_train == l, 0],
-                X_train_std_transformed[y_train == l, 1],
-                color=c,
-                label='class %s' % l,
-                alpha=0.5,
-                marker=m
-                )
-
-ax1.set_title('Training dataset after PCA')
-ax2.set_title('Standardized training dataset after PCA')
-
-for ax in (ax1, ax2):
-    ax.set_xlabel('1st principal component')
-    ax.set_ylabel('2nd principal component')
-    ax.legend(loc='upper right')
-    ax.grid()
-
-plt.tight_layout()
-
-plt.show()
+    plt.tight_layout()
+    plt.show()

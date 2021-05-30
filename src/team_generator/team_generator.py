@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 from CombinedScrapper.set_scrap import scrapping, teammates
-from teamgenerator.clustering import clustering_label
-from teamgenerator.pokepaste_generator import to_pokepaste
-from teamgenerator.set_generator import usage_to_df
+from team_generator.clustering import clustering_label
+from team_generator.pokepaste_generator import to_pokepaste
+from team_generator.set_generator import usage_to_df
 
 
 def team_generator(pokemon):

@@ -89,8 +89,6 @@ def pokedex_df():
                 ]
         df.loc[i] = list
         i = i + 1
-
-    print(len(df))
     return df
 
 
@@ -152,6 +150,15 @@ def type(type, pok):
 def poke_data_set():
     df = pokedex_df()
     feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
-    return sklearn.utils.Bunch(data= (df[feature_cols].to_numpy()).astype('float'),  target_names=numpy.array(['weak' ,'medium', 'strong']), target=(df.tierint.to_numpy()).astype('int'), feature_names = feature_cols )
+    return sklearn.utils.Bunch(data= (df[feature_cols].to_numpy()).astype('float'),  target_names=numpy.array(['weak' ,'medium', 'strong']),
+                               target=(df.tierint.to_numpy()).astype('int'), feature_names = feature_cols )
+
+def poke_level_100(stat) :
+    stat[0]= stat[0]*2+110
+    i = 1
+    while i < 6 :
+        stat[i]=stat[i]*2+5
+        i=i+1
+    return stat
 
 

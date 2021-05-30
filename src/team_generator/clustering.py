@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
-from teamgenerator.set_generator import clustering_set, usage_to_df
+from team_generator.set_generator import clustering_set, usage_to_df
 from sklearn import datasets
 
 

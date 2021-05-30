@@ -1,27 +1,14 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import datasets
 from sklearn.decomposition import PCA
-import pandas as pd
 from sklearn.preprocessing import StandardScaler
+from CombinedScrapper.pokedex_to_df_ds import poke_data_set, pokedex_df
 
-from CombinedScrapper.generator import poke_data_set, pokedex_df
 
-poke = poke_data_set()
-X, y = poke.data, poke.target
-y=y.astype('int')
-labels = poke.feature_names
-#In general a good idea is to scale the data
-scaler = StandardScaler()
-scaler.fit(X)
-X=scaler.transform(X)
-df = pokedex_df()
-num = df['num']
-
-pca = PCA()
-x_new = pca.fit_transform(X)
-
-def myplot(score,coeff,labels, num):
+def myplot(score,coeff,labels, num, y):
     xs = score[:,0]
     ys = score[:,1]
     n = coeff.shape[0]
@@ -40,12 +27,33 @@ def myplot(score,coeff,labels, num):
                      ha='center',
                      fontsize=5)  # horizontal alignment can be left, right or center
         i=i+1
-plt.xlim(-1,1)
-plt.ylim(-1,1)
-plt.xlabel("PC{}".format(1))
-plt.ylabel("PC{}".format(2))
-plt.grid()
 
-#Call the function. Use only the 2 PCs.
-myplot(x_new[:,0:2],np.transpose(pca.components_[0:2, :]), labels, num)
-plt.show()
+def variable_importance():
+    poke = poke_data_set()
+    X, y = poke.data, poke.target
+    y=y.astype('int')
+    labels = poke.feature_names
+    #In general a good idea is to scale the data
+    scaler = StandardScaler()
+    scaler.fit(X)
+    X=scaler.transform(X)
+    df = pokedex_df()
+    num = df['num']
+
+    pca = PCA()
+    x_new = pca.fit_transform(X)
+
+
+    plt.xlim(-1,1)
+    plt.ylim(-1,1)
+    plt.xlabel("PC{}".format(1))
+    plt.ylabel("PC{}".format(2))
+    plt.grid()
+
+    #Call the function. Use only the 2 PCs.
+    myplot(x_new[:,0:2],np.transpose(pca.components_[0:2, :]), labels, num, y)
+    plt.show()
+
+variable_importance()
+
+
