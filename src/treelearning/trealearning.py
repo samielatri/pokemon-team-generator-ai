@@ -5,8 +5,6 @@
 # matrice de confusion
 # some de monoclassifier
 # multi label
-import pandas as pd
-from sklearn.preprocessing import LabelEncoder
 from sklearn.tree import DecisionTreeClassifier  # Import Decision Tree Classifier
 from sklearn.model_selection import train_test_split  # Import train_test_split function
 from sklearn import metrics  # Import scikit-learn metrics module for accuracy calculation
@@ -15,24 +13,13 @@ from IPython.display import Image
 from sklearn.tree import export_graphviz
 import pydotplus
 
-from CombinedScrapper.generator import pokedex_df
+from CombinedScrapper.generator import pokedex_df, poke_data_set
 
 df = pokedex_df()
-le = LabelEncoder()
-df['abilitie1'] = LabelEncoder().fit_transform(df['abilitie1'])
-df['abilitie2'] = LabelEncoder().fit_transform(df['abilitie2'])
-df['abilitieH'] = LabelEncoder().fit_transform(df['abilitieH'])
-
-print(df['tier'].unique())
-print(df['tier'].value_counts())
 
 # split dataset in features and target variable
-feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe',
-                'abilitie1', 'abilitie2', 'abilitieH', 'Bug', 'Dark', 'Dragon',
-                'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground',
-                'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water']
-X = df[feature_cols]  # Features
-y = df.tier  # Target variable
+ds = poke_data_set()
+X, y, class_names, feature_cols = ds.data, ds.target, ds.target_names, ds.feature_names
 
 # Split dataset into training set and test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)  # 70% training and 30% test
@@ -45,7 +32,7 @@ clf = clf.fit(X_train, y_train)
 
 # #Predict the response for test dataset
 y_pred = clf.predict(X_test)
-
+#
 # # Model Accuracy, how often is the classifier correct?
 print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
 

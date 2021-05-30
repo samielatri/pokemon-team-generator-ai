@@ -13,8 +13,8 @@ def pokedex():
     status, response = http.request(f'https://play.pokemonshowdown.com/data/pokedex.json')
     pokedex = json.loads(response)
     list_pokemon = []
-    #for pokemon in pokedex:
-         #if pokedex[pokemon]['num'] > 151:
+    #"for pokemon in pokedex:
+         #if pokedex[pokemon]['num'] > 10:
              #list_pokemon.append(pokemon)
 
     for pokemon in pokedex:
@@ -30,8 +30,10 @@ def pokedex():
             list_pokemon.append(pokemon)
         if str(pokedex[pokemon].get('tier', "")) == "Illegal":
             list_pokemon.append(pokemon)
-        #if str(pokedex[pokemon].get('evos', "")) != "":
-            #list_pokemon.append(pokemon)
+        if str(pokedex[pokemon].get('tier', "")) == "(PU)":
+            list_pokemon.append(pokemon)
+        if str(pokedex[pokemon]['name'][-5:]) == "-Gmax":
+            list_pokemon.append(pokemon)
     list_pokemon = set(list_pokemon)
     for pokemon in list_pokemon:
         del pokedex[pokemon]
@@ -94,39 +96,44 @@ def pokedex_df():
 
 def switch(argument):
     switcher = {
-        'LC': 'weak',
-        'NFE': 'weak',
-        'RUBL': 'medium',
         'AG': 'strong',
-        'PU': 'weak',
-        'NU': 'medium',
-        '(PU)': 'weak',
-        'PUBL': 'weak',
-        'UU': 'strong',
+        'Uber': 'strong',
         'OU': 'strong',
         'UUBL': 'strong',
+
+        'UU': 'medium',
         'RU': 'medium',
-        'Uber': 'strong',
+        'RUBL': 'medium',
         'NUBL': 'medium',
+
+
+        'NU': 'weak',
+        'PUBL': 'weak',
+        'PU': 'weak',
+        '(PU)': 'weak',
+        'NFE': 'weak',
+        'LC': 'weak',
     }
     return switcher.get(argument)
 
 def switch_int(argument):
     switcher = {
-        'LC': 0,
-        'NFE': 0,
-        'RUBL': 1,
         'AG': 2,
-        'PU': 0,
-        'NU': 1,
-        '(PU)': 0,
-        'PUBL': 0,
-        'UU': 2,
+        'Uber': 2,
         'OU': 2,
         'UUBL': 2,
-        'RU': 1,
-        'Uber': 2,
-        'NUBL': 1,
+        'UU': 2,
+        'RUBL': 2,
+        'RU': 2,
+        'NUBL': 2,
+        'NU': 2,
+
+        'PUBL': 1,
+        'PU': 1,
+        'NFE': 1,
+
+        '(PU)': 0,
+        'LC': 0,
     }
     return switcher.get(argument)
 
@@ -144,7 +151,7 @@ def type(type, pok):
 
 def poke_data_set():
     df = pokedex_df()
-    feature_cols = ['hp', 'atk','spa',  'spe']
+    feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
     return sklearn.utils.Bunch(data= (df[feature_cols].to_numpy()).astype('float'),  target_names=numpy.array(['weak' ,'medium', 'strong']), target=(df.tierint.to_numpy()).astype('int'), feature_names = feature_cols )
 
 

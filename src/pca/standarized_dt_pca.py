@@ -17,9 +17,7 @@ features, target = poke.data, poke.target
 
 
 # Make a train/test split using 30% test size
-X_train, X_test, y_train, y_test = train_test_split(features, target,
-                                                    test_size=0.30,
-                                                    random_state=RANDOM_STATE)
+X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=RANDOM_STATE)
 
 # Fit to data and predict using pipelined GNB and PCA.
 unscaled_clf = make_pipeline(PCA(n_components=4), GaussianNB())
