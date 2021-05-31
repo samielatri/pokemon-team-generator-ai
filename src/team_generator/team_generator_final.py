@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-from CombinedScrapper.set_scrap import scrapping, teammates
+from CombinedScrapper.set_scrap import teammates
 from team_generator.clustering import clustering_label
 from team_generator.pokepaste_generator import to_pokepaste
 from team_generator.set_generator import usage_to_df

@@ -13,9 +13,6 @@ def pokedex():
     status, response = http.request(f'https://play.pokemonshowdown.com/data/pokedex.json')
     pokedex = json.loads(response)
     list_pokemon = []
-    #"for pokemon in pokedex:
-         #if pokedex[pokemon]['num'] > 10:
-             #list_pokemon.append(pokemon)
 
     for pokemon in pokedex:
         if pokedex[pokemon]['num'] < 1:
@@ -24,13 +21,17 @@ def pokedex():
     for pokemon in list_pokemon:
         del pokedex[pokemon]
 
+    #enlever les pokemon nfe de faible vers medium
+    list_nfe = ['Piloswine', 'Golbat', 'Pikachu', 'Gurdurr', 'Thwackey', 'Raboot', 'Kadabra', 'Ferroseed', 'Tangela', 'Hattrem', 'Corsola-Galar', 'Wartortle', 'Electabuzz', 'Duosion', 'Mareanie', 'Magmar', 'Mr. Mime-Galar', 'Slowpoke', 'Koffing', 'Krokorok', 'Vullaby', 'Marshtomp', 'Gabite', 'Klang', 'Lampent', 'Clefairy', 'Ivysaur', 'Vulpix', 'Roselia', 'Linoone-Galar', 'Fraxure', 'Drakloak', 'Machoke', 'Togetic', 'Hakamo-o', 'Impidimp', 'Rufflet', 'Dusclops', 'Carkol', 'Charjabug', 'Zweilous', 'Porygon', 'Metang', 'Archen', 'Combusken', 'Seadra', 'Dartrix', 'Lairon', 'Drilbur', 'Cutiefly', 'Poipole', 'Palpitoad', 'Dwebble', 'Trapinch', 'Gastly', 'Morgrem', 'Dottler', 'Shelmet', 'Salandit', 'Stunky', 'Nuzleaf', 'Torracat', 'Wailmer', 'Corvisquire', 'Charmeleon', 'Grovyle', 'Zorua', 'Krabby', 'Shelgon', 'Marill', 'Carvanha', 'Dragonair', 'Gothorita', 'Sealeo', 'Drizzile', 'Munchlax', 'Swirlix', 'Mudbray', 'Brionne', 'Vibrava', 'Nidorino', 'Mienfoo', 'Trubbish', 'Luxio', 'Abra', 'Helioptile', 'Whirlipede', 'Amaura', 'Bunnelby', 'Fletchinder', 'Boldore', 'Ralts', 'Cubone', 'Omanyte', 'Lickitung', 'Sliggoo', 'Cherubi', 'Tyrunt', 'Shellos', 'Woobat', 'Metapod', 'Pupitar', 'Jigglypuff', 'Drifloon', 'Gloom', 'Mantyke', 'Slowpoke-Galar', 'Lileep', 'Natu', 'Tentacool', 'Croagunk', 'Elekid', 'Frillish', 'Poliwhirl', 'Aron', 'Scraggy', 'Vulpix-Alola', 'Magnemite', 'Onix', 'Kubfu', 'Ponyta-Galar', 'Kirlia', 'Bronzor', 'Clauncher', 'Cosmoem', 'Herdier', 'Tirtouga', 'Purrloin', 'Happiny', 'Anorith', 'Sizzlipede', 'Nincada', 'Larvesta', 'Karrablast', 'Dewpider', 'Corphish', 'Diglett', 'Hippopotas', 'Treecko', 'Loudred', 'Wynaut', 'Rockruff', 'Noibat', 'Espurr', 'Gothita', 'Cleffa', 'Eevee', 'Beldum', 'Clobbopus', 'Applin', 'Hatenna', 'Swinub', 'Grookey', 'Binacle', 'Lombre', 'Axew', 'Dreepy', 'Lotad', 'Azurill', "Farfetch'd-Galar", 'Bergmite', 'Grubbin', 'Magby', 'Machop', 'Bagon', 'Joltik', 'Zigzagoon-Galar', 'Rolycoly', 'Spritzee', 'Diglett-Alola', 'Darumaka-Galar', 'Cufant', 'Zigzagoon', 'Scorbunny', 'Squirtle', 'Pichu', 'Cottonee', 'Togepi', 'Deino', 'Goomy', 'Silicobra', 'Solosis', 'Sandile', 'Cosmog', 'Remoraid', 'Charmander', 'Buneary', 'Growlithe', 'Munna', 'Dratini', 'Nickit', 'Pancham', 'Mudkip', 'Shellder', 'Skorupi', 'Chewtle', 'Kabuto', 'Feebas', 'Bonsly', 'Vanillish', 'Meowth-Galar', 'Sandshrew-Alola', 'Bulbasaur', 'Toxel', 'Yamask', 'Sobble', 'Arrokuda', 'Chinchou', 'Igglybuff', 'Popplio', 'Darumaka', 'Electrike', 'Venipede', 'Wimpod', 'Tyrogue', 'Mime Jr.', 'Meowth-Alola', 'Gible', 'Litwick', 'Litten', 'Wooper', 'Duskull', 'Klink', 'Tranquill', 'Roggenrola', 'Cubchoo', 'Spheal', 'Snom', 'Smoochum', 'Skwovet', 'Combee', 'Rowlet', 'Sandshrew', 'Inkay', 'Larvitar', 'Nidorina', 'Rookidee', 'Timburr', 'Exeggcute', 'Sinistea', 'Barboach', 'Golett', 'Minccino', 'NidoranM', 'Elgyem', 'Fomantis', 'Budew', 'Morelull', 'Zubat', 'Caterpie']
     list_pokemon = []
     for pokemon in pokedex:
         if str(pokedex[pokemon].get('tier', "")) == "":
             list_pokemon.append(pokemon)
-        if str(pokedex[pokemon].get('tier', "")) == "Illegal":
+        elif str(pokedex[pokemon]['name']) in list_nfe and str(pokedex[pokemon].get('tier', "")) == "NFE":
+            pokedex[pokemon]['tier']='PU'
+        elif str(pokedex[pokemon].get('tier', "")) == "Illegal":
             list_pokemon.append(pokemon)
-        if str(pokedex[pokemon].get('tier', "")) == "(PU)":
+        elif str(pokedex[pokemon].get('tier', "")) == "(PU)":
             list_pokemon.append(pokemon)
         if str(pokedex[pokemon]['name'][-5:]) == "-Gmax":
             list_pokemon.append(pokemon)
@@ -128,9 +129,8 @@ def switch_int(argument):
 
         'PUBL': 1,
         'PU': 1,
-        'NFE': 1,
 
-        '(PU)': 0,
+        'NFE': 0,
         'LC': 0,
     }
     return switcher.get(argument)

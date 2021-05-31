@@ -55,4 +55,6 @@ def show_clustering() :
     plt.title('Classification K-means ')
     plt.show()
 
+show_clustering()
+
 

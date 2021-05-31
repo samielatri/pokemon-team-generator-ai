@@ -25,7 +25,7 @@ def myplot(score,coeff,labels, num, y):
                      textcoords="offset points",  # how to position the text
                      xytext=(0, 5),  # distance from text to points (x,y)
                      ha='center',
-                     fontsize=5)  # horizontal alignment can be left, right or center
+                     fontsize=7)  # horizontal alignment can be left, right or center
         i=i+1
 
 def variable_importance():
@@ -39,7 +39,6 @@ def variable_importance():
     X=scaler.transform(X)
     df = pokedex_df()
     num = df['num']
-
     pca = PCA()
     x_new = pca.fit_transform(X)
 
