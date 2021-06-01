@@ -38,5 +38,3 @@ def confusion_matrix():
         print(disp.confusion_matrix)
 
     plt.show()
-
-confusion_matrix()

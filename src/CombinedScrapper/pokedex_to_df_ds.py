@@ -8,6 +8,7 @@ import pandas as pd
 import numpy
 import sklearn
 
+
 def pokedex():
     http = httplib2.Http()
     status, response = http.request(f'https://play.pokemonshowdown.com/data/pokedex.json')
@@ -21,14 +22,25 @@ def pokedex():
     for pokemon in list_pokemon:
         del pokedex[pokemon]
 
-    #enlever les pokemon nfe de faible vers medium
-    list_nfe = ['Piloswine', 'Golbat', 'Pikachu', 'Gurdurr', 'Thwackey', 'Raboot', 'Kadabra', 'Ferroseed', 'Tangela', 'Hattrem', 'Corsola-Galar', 'Wartortle', 'Electabuzz', 'Duosion', 'Mareanie', 'Magmar', 'Mr. Mime-Galar', 'Slowpoke', 'Koffing', 'Krokorok', 'Vullaby', 'Marshtomp', 'Gabite', 'Klang', 'Lampent', 'Clefairy', 'Ivysaur', 'Vulpix', 'Roselia', 'Linoone-Galar', 'Fraxure', 'Drakloak', 'Machoke', 'Togetic', 'Hakamo-o', 'Impidimp', 'Rufflet', 'Dusclops', 'Carkol', 'Charjabug', 'Zweilous', 'Porygon', 'Metang', 'Archen', 'Combusken', 'Seadra', 'Dartrix', 'Lairon', 'Drilbur', 'Cutiefly', 'Poipole', 'Palpitoad', 'Dwebble', 'Trapinch', 'Gastly', 'Morgrem', 'Dottler', 'Shelmet', 'Salandit', 'Stunky', 'Nuzleaf', 'Torracat', 'Wailmer', 'Corvisquire', 'Charmeleon', 'Grovyle', 'Zorua', 'Krabby', 'Shelgon', 'Marill', 'Carvanha', 'Dragonair', 'Gothorita', 'Sealeo', 'Drizzile', 'Munchlax', 'Swirlix', 'Mudbray', 'Brionne', 'Vibrava', 'Nidorino', 'Mienfoo', 'Trubbish', 'Luxio', 'Abra', 'Helioptile', 'Whirlipede', 'Amaura', 'Bunnelby', 'Fletchinder', 'Boldore', 'Ralts', 'Cubone', 'Omanyte', 'Lickitung', 'Sliggoo', 'Cherubi', 'Tyrunt', 'Shellos', 'Woobat', 'Metapod', 'Pupitar', 'Jigglypuff', 'Drifloon', 'Gloom', 'Mantyke', 'Slowpoke-Galar', 'Lileep', 'Natu', 'Tentacool', 'Croagunk', 'Elekid', 'Frillish', 'Poliwhirl', 'Aron', 'Scraggy', 'Vulpix-Alola', 'Magnemite', 'Onix', 'Kubfu', 'Ponyta-Galar', 'Kirlia', 'Bronzor', 'Clauncher', 'Cosmoem', 'Herdier', 'Tirtouga', 'Purrloin', 'Happiny', 'Anorith', 'Sizzlipede', 'Nincada', 'Larvesta', 'Karrablast', 'Dewpider', 'Corphish', 'Diglett', 'Hippopotas', 'Treecko', 'Loudred', 'Wynaut', 'Rockruff', 'Noibat', 'Espurr', 'Gothita', 'Cleffa', 'Eevee', 'Beldum', 'Clobbopus', 'Applin', 'Hatenna', 'Swinub', 'Grookey', 'Binacle', 'Lombre', 'Axew', 'Dreepy', 'Lotad', 'Azurill', "Farfetch'd-Galar", 'Bergmite', 'Grubbin', 'Magby', 'Machop', 'Bagon', 'Joltik', 'Zigzagoon-Galar', 'Rolycoly', 'Spritzee', 'Diglett-Alola', 'Darumaka-Galar', 'Cufant', 'Zigzagoon', 'Scorbunny', 'Squirtle', 'Pichu', 'Cottonee', 'Togepi', 'Deino', 'Goomy', 'Silicobra', 'Solosis', 'Sandile', 'Cosmog', 'Remoraid', 'Charmander', 'Buneary', 'Growlithe', 'Munna', 'Dratini', 'Nickit', 'Pancham', 'Mudkip', 'Shellder', 'Skorupi', 'Chewtle', 'Kabuto', 'Feebas', 'Bonsly', 'Vanillish', 'Meowth-Galar', 'Sandshrew-Alola', 'Bulbasaur', 'Toxel', 'Yamask', 'Sobble', 'Arrokuda', 'Chinchou', 'Igglybuff', 'Popplio', 'Darumaka', 'Electrike', 'Venipede', 'Wimpod', 'Tyrogue', 'Mime Jr.', 'Meowth-Alola', 'Gible', 'Litwick', 'Litten', 'Wooper', 'Duskull', 'Klink', 'Tranquill', 'Roggenrola', 'Cubchoo', 'Spheal', 'Snom', 'Smoochum', 'Skwovet', 'Combee', 'Rowlet', 'Sandshrew', 'Inkay', 'Larvitar', 'Nidorina', 'Rookidee', 'Timburr', 'Exeggcute', 'Sinistea', 'Barboach', 'Golett', 'Minccino', 'NidoranM', 'Elgyem', 'Fomantis', 'Budew', 'Morelull', 'Zubat', 'Caterpie']
+    # enlever les pokemon nfe de faible vers medium
+    list_nfe = ['Piloswine', 'Golbat', 'Pikachu', 'Gurdurr', 'Thwackey', 'Raboot', 'Kadabra', 'Ferroseed', 'Tangela',
+                'Hattrem', 'Corsola-Galar', 'Wartortle', 'Electabuzz', 'Duosion', 'Mareanie', 'Magmar',
+                'Mr. Mime-Galar', 'Slowpoke', 'Koffing', 'Krokorok', 'Vullaby', 'Marshtomp', 'Gabite', 'Klang',
+                'Lampent', 'Clefairy', 'Ivysaur', 'Vulpix', 'Roselia', 'Linoone-Galar', 'Fraxure', 'Drakloak',
+                'Machoke', 'Togetic', 'Hakamo-o', 'Impidimp', 'Rufflet', 'Dusclops', 'Carkol', 'Charjabug', 'Zweilous',
+                'Porygon', 'Metang', 'Archen', 'Combusken', 'Seadra', 'Dartrix', 'Lairon', 'Drilbur', 'Cutiefly',
+                'Poipole', 'Palpitoad', 'Dwebble', 'Trapinch', 'Gastly', 'Morgrem', 'Dottler', 'Shelmet', 'Salandit',
+                'Stunky', 'Nuzleaf', 'Torracat', 'Wailmer', 'Corvisquire', 'Charmeleon', 'Grovyle', 'Zorua', 'Krabby',
+                'Shelgon', 'Marill', 'Carvanha', 'Dragonair', 'Gothorita', 'Sealeo', 'Drizzile', 'Munchlax', 'Swirlix',
+                'Mudbray', 'Brionne', 'Vibrava', 'Nidorino', 'Mienfoo', 'Trubbish', 'Luxio', 'Abra', 'Helioptile',
+                'Whirlipede', 'Amaura', 'Bunnelby', 'Fletchinder', 'Boldore', 'Ralts', 'Cubone', 'Omanyte', 'Lickitung',
+                'Sliggoo', 'Cherubi', 'Tyrunt', 'Shellos', 'Woobat']
     list_pokemon = []
     for pokemon in pokedex:
         if str(pokedex[pokemon].get('tier', "")) == "":
             list_pokemon.append(pokemon)
         elif str(pokedex[pokemon]['name']) in list_nfe and str(pokedex[pokemon].get('tier', "")) == "NFE":
-            pokedex[pokemon]['tier']='PU'
+            pokedex[pokemon]['tier'] = 'PU'
         elif str(pokedex[pokemon].get('tier', "")) == "Illegal":
             list_pokemon.append(pokemon)
         elif str(pokedex[pokemon].get('tier', "")) == "(PU)":
@@ -68,7 +80,7 @@ def pokedex():
 def pokedex_df():
     # Create a DataFrame object
     df = pd.DataFrame(
-        columns=['Name', 'num', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'abilitie1', 'abilitie2', 'abilitieH', 'tier', 'tierint',
+        columns=['Name', 'num', 'hp', 'atk', 'def', 'spa', 'spd', 'spe', 'tier', 'tierint',
                  'Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground',
                  'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water'])
     # Add new ROW
@@ -76,11 +88,10 @@ def pokedex_df():
     i = 0
     for pokemon in poke:
         list = [poke[pokemon]['name'], poke[pokemon]['num'],
-                poke[pokemon]['baseStats']['hp']*2+110, poke[pokemon]['baseStats']['atk']*2+5,
-                poke[pokemon]['baseStats']['def']*2+5, poke[pokemon]['baseStats']['spa']*2+5,
-                poke[pokemon]['baseStats']['spd']*2+5, poke[pokemon]['baseStats']['spe']*2+5,
-                poke[pokemon]['abilities']['0'], poke[pokemon]['abilities']['1'],
-                poke[pokemon]['abilities']['H'], switch(str(poke[pokemon]['tier'])), switch_int(str(poke[pokemon]['tier'])),
+                poke[pokemon]['baseStats']['hp'] * 2 + 110, poke[pokemon]['baseStats']['atk'] * 2 + 5,
+                poke[pokemon]['baseStats']['def'] * 2 + 5, poke[pokemon]['baseStats']['spa'] * 2 + 5,
+                poke[pokemon]['baseStats']['spd'] * 2 + 5, poke[pokemon]['baseStats']['spe'] * 2 + 5,
+                switch(str(poke[pokemon]['tier'])), switch_int(str(poke[pokemon]['tier'])),
                 type('Bug', poke[pokemon]), type('Dark', poke[pokemon]), type('Dragon', poke[pokemon]),
                 type('Electric', poke[pokemon]), type('Fairy', poke[pokemon]), type('Fighting', poke[pokemon]),
                 type('Fire', poke[pokemon]), type('Flying', poke[pokemon]), type('Ghost', poke[pokemon]),
@@ -90,6 +101,8 @@ def pokedex_df():
                 ]
         df.loc[i] = list
         i = i + 1
+    # print(df['tier'].value_counts())
+    # print(df)
     return df
 
 
@@ -105,7 +118,6 @@ def switch(argument):
         'RUBL': 'medium',
         'NUBL': 'medium',
 
-
         'NU': 'weak',
         'PUBL': 'weak',
         'PU': 'weak',
@@ -114,6 +126,7 @@ def switch(argument):
         'LC': 'weak',
     }
     return switcher.get(argument)
+
 
 def switch_int(argument):
     switcher = {
@@ -129,7 +142,7 @@ def switch_int(argument):
 
         'PUBL': 1,
         'PU': 1,
-
+        '(PU)': 1,
         'NFE': 0,
         'LC': 0,
     }
@@ -149,16 +162,16 @@ def type(type, pok):
 
 def poke_data_set():
     df = pokedex_df()
-    feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
-    return sklearn.utils.Bunch(data= (df[feature_cols].to_numpy()).astype('float'),  target_names=numpy.array(['weak' ,'medium', 'strong']),
-                               target=(df.tierint.to_numpy()).astype('int'), feature_names = feature_cols )
+    feature_cols = ['hp', 'atk', 'spa', 'spd']
+    return sklearn.utils.Bunch(data=(df[feature_cols].to_numpy()).astype('float'),
+                               target_names=numpy.array(['weak', 'medium', 'strong']),
+                               target=(df.tierint.to_numpy()).astype('int'), feature_names=feature_cols)
 
-def poke_level_100(stat) :
-    stat[0]= stat[0]*2+110
+
+def poke_level_100(stat):
+    stat[0] = stat[0] * 2 + 110
     i = 1
-    while i < 6 :
-        stat[i]=stat[i]*2+5
-        i=i+1
+    while i < 6:
+        stat[i] = stat[i] * 2 + 5
+        i = i + 1
     return stat
-
-

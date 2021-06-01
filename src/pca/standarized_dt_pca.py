@@ -14,15 +14,15 @@ def pca_accuracy():
     features, target = poke.data, poke.target
 
     # Make a train/test split using 30% test size
-    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=2)
 
     # Fit to data and predict using pipelined GNB and PCA.
-    unscaled_clf = make_pipeline(PCA(n_components=6), GaussianNB())
+    unscaled_clf = make_pipeline(PCA(n_components=4), GaussianNB())
     unscaled_clf.fit(X_train, y_train)
     pred_test = unscaled_clf.predict(X_test)
 
     # Fit to data and predict using pipelined scaling, GNB and PCA.
-    std_clf = make_pipeline(StandardScaler(), PCA(n_components=6), GaussianNB())
+    std_clf = make_pipeline(StandardScaler(), PCA(n_components=4), GaussianNB())
     std_clf.fit(X_train, y_train)
     pred_test_std = std_clf.predict(X_test)
 
@@ -44,12 +44,12 @@ def show_pca():
     X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.30, random_state=42)
 
     # Fit to data and predict using pipelined GNB and PCA.
-    unscaled_clf = make_pipeline(PCA(n_components=6), GaussianNB())
+    unscaled_clf = make_pipeline(PCA(n_components=4), GaussianNB())
     unscaled_clf.fit(X_train, y_train)
     pred_test = unscaled_clf.predict(X_test)
 
     # Fit to data and predict using pipelined scaling, GNB and PCA.
-    std_clf = make_pipeline(StandardScaler(), PCA(n_components=6), GaussianNB())
+    std_clf = make_pipeline(StandardScaler(), PCA(n_components=4), GaussianNB())
     std_clf.fit(X_train, y_train)
 
     # Extract PCA from pipeline

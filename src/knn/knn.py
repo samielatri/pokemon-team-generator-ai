@@ -12,7 +12,7 @@ from CombinedScrapper.pokedex_to_df_ds import pokedex_df
 def knn_accuracy():
     df = pokedex_df()
 
-    feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
+    feature_cols = ['hp', 'atk',  'spa', 'spd']
     X = df[feature_cols] # Features
     y = df.tier # Target variable
 
@@ -37,7 +37,7 @@ def knn_accuracy():
 def predict_knn(stat) :
     df = pokedex_df()
 
-    feature_cols = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
+    feature_cols = ['atk', 'def', 'spa', 'spd']
     X = df[feature_cols] # Features
     y = df.tier # Target variable
 

@@ -1,7 +1,6 @@
 # coding: utf-8
 
 # Implémentation de K-means clustering python
-# Code produit par le site https://mrmint.fr
 
 #Chargement des bibliothèques
 import pandas as pd
@@ -9,7 +8,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from team_generator.set_generator import clustering_set, usage_to_df
-from sklearn import datasets
 
 
 #chargement de jeu des données Iris
@@ -17,8 +15,6 @@ from sklearn import datasets
 def clustering_label():
     poke = clustering_set()
 
-
-    #importer le jeu de données Iris dataset à l'aide du module pandas
     x = pd.DataFrame(poke.data)
 
     x.columns = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
@@ -41,8 +37,7 @@ def show_clustering() :
 
     x.columns = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
     labels_ = clustering_label()
-    colormap = np.array(['Red', 'green', 'blue'])
-    print(labels_)
+    colormap = np.array(['#65BFF0', '#7B0D24', '#7AE097'])
 
     # Visualisation des clusters formés par K-Means
     plt.scatter(x.spe, x.atk, c=colormap[labels_], s=40)
@@ -54,7 +49,5 @@ def show_clustering() :
 
     plt.title('Classification K-means ')
     plt.show()
-
-show_clustering()
 
 

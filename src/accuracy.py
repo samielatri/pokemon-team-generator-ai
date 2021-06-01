@@ -7,7 +7,6 @@ from tree_learning.one_encoder import one_encoder_accuracy
 from tree_learning.tree_learning import tree_learning_accuracy
 
 tree_learning_accuracy()
-one_encoder_accuracy()
 random_forest_accuracy()
 knn_accuracy()
 pca_accuracy()
