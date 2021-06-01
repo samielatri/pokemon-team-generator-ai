@@ -57,3 +57,4 @@ def knn_k_value():
     plt.ylabel('Mean Error')
     plt.show()
 
+knn_k_value()

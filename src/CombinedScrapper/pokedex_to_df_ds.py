@@ -171,7 +171,7 @@ def poke_data_set():
 def poke_level_100(stat):
     stat[0] = stat[0] * 2 + 110
     i = 1
-    while i < 6:
+    while i < 4:
         stat[i] = stat[i] * 2 + 5
         i = i + 1
     return stat

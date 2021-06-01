@@ -94,3 +94,29 @@ def show_pca():
 
     plt.tight_layout()
     plt.show()
+
+def pca_predict(stats):
+    poke = poke_data_set()
+    features, target,  class_names = poke.data, poke.target, poke.target_names
+
+    # Make a train/test split using 30% test size
+    X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.01, random_state=2)
+
+    # Fit to data and predict using pipelined GNB and PCA.
+    unscaled_clf = make_pipeline(PCA(n_components=4), GaussianNB())
+    unscaled_clf.fit(X_train, y_train)
+    pred_test = unscaled_clf.predict([stats])
+
+    # Fit to data and predict using pipelined scaling, GNB and PCA.
+    std_clf = make_pipeline(StandardScaler(), PCA(n_components=4), GaussianNB())
+    std_clf.fit(X_train, y_train)
+    pred_test_std = std_clf.predict([stats])
+
+    # Show prediction accuracies in scaled and unscaled data.
+    print("___PCA__NORMAL_DATASET___")
+    print("Prediction: ", class_names[pred_test[0]])
+    print('\n')
+
+    print("___PCA__STANDARDIZED_DATASET___")
+    print("Prediction: ", class_names[pred_test_std[0]])
+    print('\n')

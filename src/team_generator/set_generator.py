@@ -32,11 +32,19 @@ def usage_to_df():
     usage = pd.read_csv(f"output/{filename}.csv")
 
     del usage['null']
-    indexNames = usage[usage['Rank'] > 53].index
+    indexNames = usage[usage['Rank'] > 57].index
     usage.drop(indexNames, inplace=True)
     indexNames = usage[usage['Rank'] == 40.0].index
     usage.drop(indexNames, inplace=True)
     indexNames = usage[usage['Rank'] == 48.0].index
+    usage.drop(indexNames, inplace=True)
+    indexNames = usage[usage['Rank'] == 15.0].index
+    usage.drop(indexNames, inplace=True)
+    indexNames = usage[usage['Rank'] == 12.0].index
+    usage.drop(indexNames, inplace=True)
+    indexNames = usage[usage['Rank'] == 21.0].index
+    usage.drop(indexNames, inplace=True)
+    indexNames = usage[usage['Rank'] == 56.0].index
     usage.drop(indexNames, inplace=True)
 
     list_poke_set = usage['Pokemon'].tolist()
