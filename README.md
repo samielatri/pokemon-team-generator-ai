@@ -10,3 +10,5 @@ lancer le fichier src/accurancy_main
 
 Pour générer une team lancer le fichier :
 src/team_generator/team_genrator_final
+
+Most important thing, listen to this : https://youtu.be/lQOEhxTZbz8
