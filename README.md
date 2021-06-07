@@ -5,14 +5,14 @@
 If you don't know what a pokedex is, you don't have the right to use the power of this tool, it would be a dishoner for all pokemon trainers.
 Seriously though, if you want to learn, more about this project refer to "documentation.pdf" but you need to speak french. BAGUETTE
 
-##1 Installation
+### Installation
 
 ### requirements
 
 Hey nerd ! Create a conda environment with all packages specified in "requirements.txt" file, present, is in root folder.
 Clone this repo and enjoy !!
 
-##2 How to use it professor ?
+### How to use it professor ?
 
 [FR]
 
@@ -37,7 +37,7 @@ pas assez de budget consacré pour la traduction
 
 Most important thing, listen to this : https://youtu.be/lQOEhxTZbz8
 
-##3 How to contribute ?
+### How to contribute ?
 
 just DANT
 
