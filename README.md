@@ -1,4 +1,17 @@
-# pokedex
+# Pokedex
+
+##0. What the hell is Pokedex ?
+If you don't know what a pokedex is, you don't have the right to use the power of this tool, it would be a dishoner for all pokemon trainers.
+Seriously though, if you want to learn, more about this project refer to "documentation.pdf" but you need to speak french. BAGUETTE
+
+##1. Installation
+### requirements
+Hey nerd ! Create a conda environment with all packages specified in "requirements.txt" file, present, is in root folder.
+Clone this repo and enjoy !!
+
+##2. How to use it professor ?
+
+[FR]
 
 Utilisation de techniques de machine learning pour la compétition Pokémon
 
@@ -11,7 +24,17 @@ lancer le fichier src/accurancy_main
 Pour générer une team lancer le fichier :
 src/team_generator/team_genrator_final
 
+[ENG]
+
+python src/predict_main
+python src/accurancy_main
+python src/team_generator/team_genrator_final
+
+pas assez de budget consacré pour la traduction 
+
 Most important thing, listen to this : https://youtu.be/lQOEhxTZbz8
 
-## requirements
-requirements.txt is in root folder
+##3. How to contribute ?
+just DANT
+
+
