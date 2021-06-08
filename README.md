@@ -7,6 +7,10 @@ Seriously though, if you want to learn, more about this project refer to "docume
 
 ### Installation
 
+1.sans travail, pas de medaille
+2.Les froussards au placards
+3.Garde le sourire pour reussir
+
 ### requirements
 
 Hey nerd ! Create a conda environment with all packages specified in "requirements.txt" file, present, is in root folder.
@@ -36,6 +40,9 @@ python src/team_generator/team_genrator_final
 pas assez de budget consacré pour la traduction 
 
 Most important thing, listen to this : https://youtu.be/lQOEhxTZbz8
+
+Au travail
+Hourra
 
 ### How to contribute ?
 
