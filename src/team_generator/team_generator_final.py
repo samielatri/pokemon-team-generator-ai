@@ -19,7 +19,7 @@ def team_generator(pokemon):
         for index, row in dex.iterrows():
             if row["Name"] == p:
                 list_label.append(row['Cluster'])
-    list_team = teammates(f'export_poke.csv', pokemon_list[0])
+    list_team = teammates(f'output/export_poke.csv', pokemon_list[0])
     for p in list_team:
         if not p in pokemon_list and len(pokemon_list) < 2:
             for index, row in dex.iterrows():
@@ -40,7 +40,7 @@ def team_generator(pokemon):
             break
 
     # ADD THE FOURTH POKEMON
-    list_team = teammates(f'export_poke.csv', pokemon_list[2])
+    list_team = teammates(f'output/export_poke.csv', pokemon_list[2])
     for p in list_team:
         if not p in pokemon_list and len(pokemon_list) < 4:
             for index, row in dex.iterrows():
@@ -54,7 +54,7 @@ def team_generator(pokemon):
         if row["Name"] == pokemon_list[3]:
             list_label.append(row['Cluster'])
             break
-    list_team = teammates(f'export_poke.csv', pokemon_list[3])
+    list_team = teammates(f'output/export_poke.csv', pokemon_list[3])
     for p in list_team:
         if not p in pokemon_list and len(pokemon_list) < 5:
             for index, row in dex.iterrows():
@@ -70,7 +70,7 @@ def team_generator(pokemon):
             if row["Name"] == pokemon_list[i]:
                 list_label.append(row['Cluster'])
         i = i + 1
-    list_team = teammates(f'export_poke.csv', pokemon_list[4])
+    list_team = teammates(f'output/export_poke.csv', pokemon_list[4])
     for p in list_team:
         if not p in pokemon_list and len(pokemon_list) < 6:
             for index, row in dex.iterrows():
