@@ -11,9 +11,11 @@ Seriously though, if you want to learn, more about this project refer to "docume
 2.Les froussards au placards
 3.Garde le sourire pour reussir
 
+Maintenant go voir requirements 
+
 ### requirements
 
-Hey nerd ! Create a conda environment with all packages specified in "requirements.txt" file, present, is in root folder.
+Hey nerd ! Create a conda environment with python's version equal to 3.8 with all packages specified in "requirements.txt" file that is present is in root folder, installed.
 Clone this repo and enjoy !!
 
 ### How to use it professor ?
