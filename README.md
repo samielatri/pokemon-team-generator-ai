@@ -1,4 +1,4 @@
-# Pokedex
+# Pokedex : pokemon team generator ai
 
 ##0 What the hell is Pokedex ?
 
