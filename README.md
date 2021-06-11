@@ -31,13 +31,13 @@ Pour estimer la puissance d'un Pokémon à partir de ses statistiques :
 lancer le fichier src/accurancy_main.py
 
 Pour générer une team lancer le fichier :
-src/team_generator/team_genrator_main.py
+src/team_genrator_main.py
 
 [ENG]
 
-python src/predict_main
-python src/accurancy_main
-python src/team_generator/team_genrator_final
+python src/predict_main.py
+python src/accurancy_main.py
+python src/src/team_genrator_main.py
 
 pas assez de budget consacré pour la traduction 
 
